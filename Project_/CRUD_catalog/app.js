@@ -15,7 +15,7 @@ con.on('open',function(){
 })
 
 app.use(express.json())
-
+app.use(express.urlencoded());
 app.set('views', 'views');
 app.set('view engine', 'ejs')
 

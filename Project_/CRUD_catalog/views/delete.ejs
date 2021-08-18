@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
 </head>
 <body>
-    <h2>Are you sure to delete this product?</h2>
-    <input id="id" type="hidden" value="<%=idd%>">
-    <button type="button" class="btn btn-outline-secondary">Delete</button>
-    <a href="index" class="btn btn-outline-secondary"> Cancel</a>
+    <div class="container text-center">
+        <a style="color: black;" href="/" type="button"><i class="bi bi-arrow-left-circle"></i></a>
+        <form method='post' action='/delete'>
+            <h2>Are you sure to delete this product ?</h2>
+            <input name="_id" type="hidden" value="<%=idd%>">
+            <button type="submit" class="btn btn-outline-secondary">Delete</button>
+            <a href="/" class="btn btn-outline-secondary"> Cancel</a>
+        </form>
+    </div>
 </body>
 </html>

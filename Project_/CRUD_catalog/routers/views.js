@@ -6,7 +6,7 @@ const registerViews = (app)=>{
     app.get('/', async (req,res)=>{
         try{
             const products= await Product.find({})
-            console.log(products)
+         //   console.log(products)
             res.render('index',{products:products})
         }
         catch(err){
@@ -25,7 +25,7 @@ const registerViews = (app)=>{
 
     app.get('/edit/:id', async (req,res)=>{
         const product= await Product.findById(req.params.id)
-        res.render('edit',{product:product})
+        res.render('edit',{product:product})//wyśietlenie formularza
     })
 
     app.get('/delete/:id', async (req,res)=>{
@@ -40,30 +40,43 @@ const registerViews = (app)=>{
             category:req.body.category,
             producent:req.body.producent
         })
-    
+        console.log("prod" + product)
         try{
             const pr= await product.save()
-            res.render('index')
+            res.redirect('/')
         }
         catch(err){
             res.send('Error '+err)
         }
     })
+    
+    app.post('/delete', async(req,res)=>{
+        // res.send('Get request')
+        console.log(req.body._id)
+         try{
+             const product= await Product.deleteOne({_id:req.body._id})
+            
+             res.redirect('/')
+         }
+         catch(err){
+             res.send('Error '+err)
+         }
+     })
 
-    app.patch('/edit', async(req,res)=>{
+    //aktualizacja
+    app.post('/edit', async(req,res)=>{
+       
         try{
             
-            console.log(products)
-           
-
-            const product= await Product.findById(req)
+            const product= await Product.findById(req.body._id)
+            
             if(req.body.name) product.name=req.body.name
             if(req.body.price) product.price=req.body.price
             if(req.body.category) product.category=req.body.category
             if(req.body.producent) product.producent=req.body.producent
             
             const newProduct=await product.save()
-            res.render('index')
+            res.redirect('/')
         }
         catch(err){
             res.send('Error '+err)
